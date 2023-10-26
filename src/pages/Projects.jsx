@@ -79,7 +79,6 @@ export const Projects = () => {
       +"\n\nThis was my first full game on Monogame. I worked on the user inputs, such as movement, shooting, as well as win conditions. The difficulty in making this game was getting our team to coordinate better than in other projects, we had many different things that needed to be done as we had never made a full game as a team, and organization and communication was the thing that I learned the most out of this project. ",
       summary: "Prisoners of War",
       images: [
-        require("../images/prisonersOfWar/gameplay.png"),
         require("../images/prisonersOfWar/title.png"),
         require("../images/prisonersOfWar/turret.png"),
       ],
