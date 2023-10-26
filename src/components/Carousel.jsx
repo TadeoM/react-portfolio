@@ -1,15 +1,21 @@
 import React, {useState} from 'react'
 import CarouselItem from './CarouselItem'
+import CarouselNoLinks from './CarouselNoLinks';
 import {ChevronLeftIcon, ChevronRightIcon, EllipsisHorizontalIcon} from '@heroicons/react/24/solid'
 
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import Overlay from './Overlay';
 
-const Carousel = (items, imgSize) => {
+// params: items, image size
+const Carousel = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  let itemList = items.items
-  let imageSize = items.imgSize
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
+  const [overlayItemIndex, setOverlayItemIndex] = useState(0)
+  let itemList = props.props
+  let imageSize = 288
   let carouselIndexMax = itemList.length - 1
+  let isButtonsClickable = props.isButtonsClickable
   // how can I get width of a div? I want to dynamically decide how many indices there will be in the
 
   const updateIndex = (newIndex) => {
@@ -44,19 +50,51 @@ const Carousel = (items, imgSize) => {
     return content
   }
 
+  const openCarousel = (index) => {
+    setOverlayItemIndex(index)
+    setIsOverlayOpen(!isOverlayOpen)
+    //255, 197, 149
+  }
+
+  const displayCarousel = () => {
+    let index = overlayItemIndex
+    return (
+      <>
+        <h1 className='text-red-500 text-left text-2xl font-bold m-auto px-4'>{itemList[index].title}</h1>
+        <CarouselNoLinks className='max-w-[50%]' images={itemList[index].images}/>
+        <h2 className='text-orange-50 text-left'><b className='text-red-500 px-4'>Role:</b> {itemList[index].role}</h2>
+        <p className='whitespace-pre-wrap text-amber-50 text-left m-auto py-5 px-4'>{itemList[index].description}</p>
+        { itemList[index].gameUrl ? (
+          <>
+            <p className='text-red-500 text-left font-semibold px-4'>Game URL: 
+              <a className='text-blue-500 text-left font-normal' href={itemList[index].gameUrl}> {itemList[index].gameUrl}</a>
+            </p>
+          </>) : null}
+        { itemList[index].sourceUrl ? (
+          <>
+            <p className='text-red-500 text-left font-semibold px-4'>Source URL: 
+              <a className='text-blue-500 text-left font-normal' href={itemList[index].sourceUrl}> {itemList[index].sourceUrl}</a>
+            </p>
+          </>) : null}
+      </>
+    )
+  }
+
   return (
     <div className='h-screen'>
       <div className='overflow-hidden'>
         <div 
           className='flex justify-center items-center duration-75 shadow-lg shadow-black transition-all '
           style={{
-            transform: `translate(-${(activeIndex * imageSize)}px)`,
+            transform: `translate(${-(activeIndex * imageSize) + 100}px)`,
             width: imageSize*itemList.length
           }}
         >
           {
             itemList.map((item, index) => {
-              return <CarouselItem key={index} item={item} width={"100%"} imgSize={imageSize}/>;
+              return <button key={index}className={`h-full ${isButtonsClickable == 'false'? 'pointer-events-none' : ''}`} onClick={()=> openCarousel(index)}>
+                  <CarouselItem props={item}/>
+                </button>;
             })
           }
         </div>
@@ -79,6 +117,11 @@ const Carousel = (items, imgSize) => {
           updateIndex(activeIndex + 1)
         }}><ChevronRightIcon /></button>
       </div>
+
+      <Overlay isOpen={isOverlayOpen} onClose={()=> setIsOverlayOpen(!isOverlayOpen)}>
+        { displayCarousel() }
+      </Overlay>
+
     </div>
   )
 }
