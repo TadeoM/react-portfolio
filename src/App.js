@@ -1,10 +1,10 @@
 import React from 'react'
 import './App.css';
 import './index.css';
-import Home from './pages/newhome';
-import Projects from './pages/projects';
-import About from './pages/about';
-import Contact from './pages/contact';
+import Home from './routes/home';
+import Projects from './routes/projects';
+import About from './routes/about';
+import Contact from './routes/contact';
 import Navbar from './components/Navbar.jsx';
 import Waves from './components/CanvasComponents/Waves'
 
