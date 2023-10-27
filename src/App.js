@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css';
 import './index.css';
-import Home from './pages/home';
+import Home from './pages/newhome';
 import Projects from './pages/projects';
 import About from './pages/about';
 import Contact from './pages/contact';
