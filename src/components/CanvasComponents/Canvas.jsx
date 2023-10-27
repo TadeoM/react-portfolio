@@ -1,4 +1,4 @@
-import React, { useRef, useEffect  } from 'react'
+import React from 'react'
 import useCanvas from './useCanvas.jsx'
 import predraw from './predraw'
 import postdraw from './postdraw.js'

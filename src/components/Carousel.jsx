@@ -62,7 +62,7 @@ const Carousel = (props) => {
       <>
         <h1 className='text-red-500 text-left text-2xl font-bold m-auto px-4'>{itemList[index].title}</h1>
         <CarouselNoLinks className='max-w-[50%]' images={itemList[index].images}/>
-        <h2 className='text-orange-50 text-left'><b className='text-red-500 px-4'>Role:</b> {itemList[index].role}</h2>
+        <h2 className='text-amber-50 text-left'><b className='text-red-500 px-4'>Role:</b> {itemList[index].role}</h2>
         <p className='whitespace-pre-wrap text-amber-50 text-left m-auto py-5 px-4'>{itemList[index].description}</p>
         { itemList[index].gameUrl ? (
           <>

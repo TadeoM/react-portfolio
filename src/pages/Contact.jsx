@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import classNames from 'classnames';
 
 import ContactBox from '../components/ContactBox';
 import HomeIcon from '@mui/icons-material/Home';
@@ -11,6 +12,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 const Contact = () => {
   const form = useRef();
   const [wasMessageSuccessful, setWasMessageSuccessful] = useState("");
+  const [isValid, setIsValid] = useState(false)
 
   let addressIcon = <HomeIcon className='text-red-500 mx-4 my-1'/>
   let phoneIcon = <ContactPhoneIcon className='text-red-500 mx-4 my-1'/>
@@ -44,8 +46,15 @@ const Contact = () => {
         return <div className='w-full mx-10 text-left flex'>Message failed to send, please try again!</div>;
     }
   }
+  const emailValidation = (event) =>
+  {
+    let value = event.target.value;
 
-  // how can I validate that someone didn't make a typo on their email?
+    let result = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+    setIsValid(result);
+    // TODO
+  }
+
   return (
     <div>
       <h1 className='px-10 pb-20 text-left text-3xl'>Get in <span className='text-red-500 font-bold'>Touch</span></h1>
@@ -61,12 +70,17 @@ const Contact = () => {
           <form className='w-full' ref={form} onSubmit={sendEmail}>
             <div className=' w-full flex my-5'>
               <input className='w-full mx-10 rounded-lg py-2 px-4 bg-neutral-800 text-neutral-400' id='name' type='text' placeholder='Name' name='user_name' required/>
-              <input className='w-full mx-10 rounded-lg py-2 px-4 bg-neutral-800 text-neutral-400' id='email' type='email' placeholder='Email' name='user_email' required/>
+              <input className='w-full mx-10 rounded-lg py-2 px-4 bg-neutral-800 text-neutral-400' id='email' type='email' placeholder='Email' name='user_email' onChange={emailValidation} required/>
             </div>
             <div className='w-full flex'>
               <textarea className='w-full h-36 mx-10 rounded-lg py-2 px-4 bg-neutral-800 text-neutral-400' id='message' type='text' placeholder='Message' name='message' required/>
             </div>
-            <button className='m-5 mx-10 px-5 py-2 bg-red-500 rounded-full float-left' type='submit' value='Send'>Submit Message</button>
+            <button className='m-5 mx-10 px-5 py-2 bg-red-500 rounded-full float-left' disabled={!isValid} type='submit' value='Send'>Submit Message</button>
+            <div className={
+              classNames({
+                hidden: isValid,
+              })
+            }>Email is invalid!</div>
             { sentEmailSwitchMessage() }
           </form>
         

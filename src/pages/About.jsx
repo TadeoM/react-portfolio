@@ -6,7 +6,7 @@ const About = () => {
       <div className='m-auto pr-10 max-w-sm w-full'>
         <img className='rounded-md' src={require("../images/me.jpg")} alt='image of me' />
       </div>
-      <div className='m-auto w-full'>
+      <div className='w-full'>
         <h2 className='text-left my-2 text-3xl font-extrabold'>Tadeo <span className='text-red-500'>Menichelli</span></h2>
         <h3 className='text-left my-3 text-xl'>Gameplay <b>Engineer</b></h3>
         <p className='text-left my-10 text-md'>My name is Tadeo Menichelli. I am a Software Engineer, with a focus in Gameplay Engineering. 
@@ -15,8 +15,8 @@ const About = () => {
         fit for!
         </p>
         {/* why does added flex make it align left, but nothing else does? Am I cheating to get this to work? */}
-        <button className='btn bg-red-500 text-amber-50 text-lg font-semibold py-4 px-10 rounded-full leading-4 flex'>
-          <a href='../downloadableFiles/TadeoMenichelliResume.pdf' download='TadeoMenichelliResume.pdf'>Download CV </a>
+        <button className='btn bg-red-500 text-amber-50 text-lg font-semibold py-4 px-10 rounded-full leading-4'>
+          <a href='../downloadableFiles/TadeoMenichelliResume.pdf' download='TadeoMenichelliResume.pdf'>Download CV</a>
         </button>
       </div>
     </div>  

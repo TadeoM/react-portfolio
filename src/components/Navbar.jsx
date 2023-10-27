@@ -6,9 +6,9 @@ import {VariableIcon, Bars3BottomRightIcon, XMarkIcon} from '@heroicons/react/24
     items-center gap-8 px-px"
     */
 const Links = [
-  {name: 'Home', link:'/Home'},
-  {name: 'About', link:'/About'},
-  {name: 'Projects', link:'/Projects'},
+  {name: 'Home', link:'/home'},
+  {name: 'About', link:'/about'},
+  {name: 'Projects', link:'/projects'},
 ];
 
 function Navbar(activeName) 
@@ -46,7 +46,7 @@ function Navbar(activeName)
           {
             Links.map((link,index) => renderLink(link,index))
           }
-          <button className='btn bg-red-500 text-amber-50 py-1 px-3 md:ml-8 rounded md:static '><a href="/Contact">Contact Me</a></button>
+          <button className='btn bg-red-500 text-amber-50 py-1 px-3 md:ml-8 rounded md:static '><a href="/contact">Contact Me</a></button>
         </ul>
       </div>
     </div>
